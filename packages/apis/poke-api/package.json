@@ -1,0 +1,18 @@
+{
+  "name": "poke-api",
+  "version": "1.0.0",
+  "description": "api layer of monorepo",
+  "main": "./build/index.js",
+  "author": "Scott Jones",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc"
+  },
+  "dependencies": {
+    "axios": "^0.18.0",
+    "pokemon": "^1.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^10.11.4"
+  }
+}
