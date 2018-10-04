@@ -1,15 +1,31 @@
 import { GraphQLServer } from "graphql-yoga";
 import signale from "signale";
+import { getPokemon } from "poke-api";
 
 const typeDefs = `
     type Query {
-        hello(name: String!): String
+        getPokemon(name: String!): Pokemon
+    }
+
+    type Pokemon {
+        id: Int
+        name: String
+        height: Int
+        moves: [PokemonMove]
+    }
+
+    type PokemonMove {
+        move: PokemonMoveData
+    }
+
+    type PokemonMoveData {
+        name: String
     }
 `;
 
 const resolvers = {
     Query: {
-        hello: (_, { name }) => `Hello, ${name}`,
+        getPokemon: (_, { name }) => getPokemon(name).then((result) => result),
     },
 };
 

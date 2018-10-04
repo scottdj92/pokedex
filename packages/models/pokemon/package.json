@@ -1,0 +1,10 @@
+{
+  "name": "pokemon",
+  "version": "1.0.0",
+  "main": "build/index.js",
+  "author": "Scott Jones",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc"
+  }
+}
