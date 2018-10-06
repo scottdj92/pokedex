@@ -4,18 +4,28 @@
 	"main": "index.js",
 	"license": "MIT",
 	"scripts": {
-		"dev": "parcel ./index.html"
+		"dev": "parcel ./index.html",
+		"typegen": "apollo codegen:generate ./models/schema --clientSchema=./models/schema/schema.json --outputFlat --queries=./components/*.tsx --target=typescript",
+		"schemagen": "apollo schema:download ./models/schema/schema.json --endpoint=http://localhost:4000",
+		"codegen": "npm run schemagen && npm run typegen"
 	},
 	"dependencies": {
 		"@smooth-ui/core-em": "^5.1.3",
+		"apollo": "1.9.1",
+		"apollo-boost": "^0.1.16",
+		"apollo-client": "^2.4.2",
 		"emotion": "^9.2.12",
 		"emotion-theming": "^9.2.9",
+		"graphql": "^14.0.2",
+		"graphql-tag": "^2.10.0",
 		"parcel-bundler": "^1.9.7",
 		"react": "^16.5.2",
+		"react-apollo": "^2.2.4",
 		"react-dom": "^16.5.2",
 		"react-emotion": "^9.2.12"
 	},
 	"devDependencies": {
+		"@types/graphql": "^14.0.1",
 		"@types/react": "^16.4.14",
 		"@types/react-dom": "^16.0.7"
 	}
