@@ -1,13 +1,12 @@
 {
 	"name": "pokedex",
 	"version": "1.0.0",
-	"main": "index.js",
 	"license": "MIT",
 	"scripts": {
 		"dev": "parcel ./index.html",
-		"typegen": "apollo codegen:generate ./models/schema --clientSchema=./models/schema/schema.json --outputFlat --queries=./components/*.tsx --target=typescript",
-		"schemagen": "apollo schema:download ./models/schema/schema.json --endpoint=http://localhost:4000",
-		"codegen": "npm run schemagen && npm run typegen"
+		"apollo-schema": "apollo schema:download ./models/schema/schema.json",
+		"apollo-codegen": "apollo codegen:generate ./models/schema/ --outputFlat --target=typescript --addTypename",
+		"codegen": "npm run apollo-schema && npm run apollo-codegen"
 	},
 	"dependencies": {
 		"@smooth-ui/core-em": "^5.1.3",
@@ -16,7 +15,7 @@
 		"apollo-client": "^2.4.2",
 		"emotion": "^9.2.12",
 		"emotion-theming": "^9.2.9",
-		"graphql": "^14.0.2",
+		"graphql": "0.13.2",
 		"graphql-tag": "^2.10.0",
 		"parcel-bundler": "^1.9.7",
 		"react": "^16.5.2",

@@ -2,6 +2,10 @@ import React from "react";
 import gql from "graphql-tag";
 import { ChildDataProps, graphql } from "react-apollo";
 import { Typography } from "@smooth-ui/core-em";
+import {
+    PokemonDetailQueryVariables,
+    PokemonDetailQuery,
+} from "models/schema/PokemonDetailQuery";
 
 const PokemonDetailQuery = gql`
     query PokemonDetailQuery($name: String!) {
@@ -12,19 +16,29 @@ const PokemonDetailQuery = gql`
     }
 `;
 
-const PokemonDetail: React.SFC<ChildDataProps<any>> = ({ data: { loading, error }}) => {
+type PokemonDetailType = ChildDataProps<{}, PokemonDetailQuery, PokemonDetailQueryVariables>;
+const PokemonDetail: React.SFC<PokemonDetailType> = ({
+    data: {
+        loading,
+        error,
+        getPokemon: {
+            height,
+            name,
+        },
+}}) => {
     if (loading || error) {
         return null;
     }
 
     return (
         <>
-            <Typography variant="h2">Pokemon detail</Typography>
+            <Typography variant="h2">{name}</Typography>
         </>
     );
 };
 
-const withPokemonDetail = graphql<{}, {}, {}>(PokemonDetailQuery, {
+const withPokemonDetail = graphql<{}, PokemonDetailQuery, PokemonDetailQueryVariables>(PokemonDetailQuery, {
+    options: () => ({ variables: { name: "bulbasaur" }}),
     props: ({ data }) => ({
         data,
     }),

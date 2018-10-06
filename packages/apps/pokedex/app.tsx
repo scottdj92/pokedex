@@ -5,7 +5,7 @@ import { injectGlobal } from "react-emotion";
 import ApolloClient from "apollo-boost";
 import { ApolloProvider } from "react-apollo";
 
-const client = new ApolloClient({ uri: "http://localhost:4000/graphql" });
+const client = new ApolloClient({ uri: "http://localhost:4000" });
 
 const App: React.SFC = () => (
     <ApolloProvider client={client}>

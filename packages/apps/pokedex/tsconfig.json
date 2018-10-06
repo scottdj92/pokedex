@@ -4,6 +4,7 @@
         "module": "commonjs",
         "jsx": "react",
         "allowSyntheticDefaultImports": true,
-        "esModuleInterop": true
+        "esModuleInterop": true,
+        "baseUrl": "."
     }
 }
