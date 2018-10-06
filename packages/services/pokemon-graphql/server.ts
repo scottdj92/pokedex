@@ -12,14 +12,34 @@ const typeDefs = `
         name: String
         height: Int
         moves: [PokemonMove]
+        sprites: PokemonSprites
+        stats: [PokemonStat]
+        types: [PokemonType]
     }
 
     type PokemonMove {
-        move: PokemonMoveData
+        move: PokemonDetailData
     }
 
-    type PokemonMoveData {
+    type PokemonDetailData {
         name: String
+    }
+
+    type PokemonSprites {
+        back_default: String
+        back_shiny: String
+        front_default: String
+        front_shiny: String
+    }
+
+    type PokemonStat {
+        base_stat: Int
+        stat: PokemonDetailData
+    }
+
+    type PokemonType {
+        slot: Int
+        type: PokemonDetailData
     }
 `;
 
