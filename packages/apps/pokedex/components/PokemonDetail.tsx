@@ -12,6 +12,9 @@ const PokemonDetailQuery = gql`
         getPokemon(name: $name) {
             name
             height
+            sprites {
+                front_default
+            }
         }
     }
 `;
@@ -21,10 +24,7 @@ const PokemonDetail: React.SFC<PokemonDetailType> = ({
     data: {
         loading,
         error,
-        getPokemon: {
-            height,
-            name,
-        },
+        getPokemon,
 }}) => {
     if (loading || error) {
         return null;
@@ -32,13 +32,14 @@ const PokemonDetail: React.SFC<PokemonDetailType> = ({
 
     return (
         <>
-            <Typography variant="h2">{name}</Typography>
+            <Typography variant="h2">{getPokemon.name}</Typography>
+            <img src={getPokemon.sprites.front_default}/>
         </>
     );
 };
 
 const withPokemonDetail = graphql<{}, PokemonDetailQuery, PokemonDetailQueryVariables>(PokemonDetailQuery, {
-    options: () => ({ variables: { name: "bulbasaur" }}),
+    options: ({}) => ({ variables: { name: "bulbasaur" }}),
     props: ({ data }) => ({
         data,
     }),
