@@ -6,12 +6,34 @@ import {
     PokemonDetailQueryVariables,
     PokemonDetailQuery,
 } from "models/schema/PokemonDetailQuery";
+import PokemonProfile from "./PokemonProfile";
+import PokemonAbilities from "./PokemonAbilities";
 
 const PokemonDetailQuery = gql`
     query PokemonDetailQuery($name: String!) {
         getPokemon(name: $name) {
+            id
             name
             height
+            weight
+            abilities {
+                ability {
+                    name
+                }
+                slot
+                is_hidden
+            }
+            stats {
+                stat {
+                    name
+                }
+            }
+            types {
+                slot
+                type {
+                    name
+                }
+            }
             sprites {
                 front_default
             }
@@ -29,11 +51,12 @@ const PokemonDetail: React.SFC<PokemonDetailType> = ({
     if (loading || error) {
         return null;
     }
+    console.log(getPokemon);
 
     return (
         <>
-            <Typography variant="h2">{getPokemon.name}</Typography>
-            <img src={getPokemon.sprites.front_default}/>
+            <PokemonProfile {...getPokemon}/>
+            <PokemonAbilities abilities={getPokemon.abilities}/>
         </>
     );
 };

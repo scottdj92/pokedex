@@ -5,7 +5,7 @@
 	"scripts": {
 		"dev": "parcel ./index.html",
 		"apollo-schema": "apollo schema:download ./models/schema/schema.json",
-		"apollo-codegen": "apollo codegen:generate ./models/schema/ --outputFlat --target=typescript --addTypename",
+		"apollo-codegen": "apollo codegen:generate ./models/schema/ --outputFlat --target=typescript",
 		"codegen": "npm run apollo-schema && npm run apollo-codegen"
 	},
 	"dependencies": {
@@ -23,11 +23,13 @@
 		"react": "^16.5.2",
 		"react-apollo": "^2.2.4",
 		"react-dom": "^16.5.2",
-		"react-emotion": "^9.2.12"
+		"react-emotion": "^9.2.12",
+		"victory": "^30.5.0"
 	},
 	"devDependencies": {
 		"@types/graphql": "^14.0.1",
 		"@types/react": "^16.4.14",
-		"@types/react-dom": "^16.0.7"
+		"@types/react-dom": "^16.0.7",
+		"@types/victory": "^0.9.20"
 	}
 }

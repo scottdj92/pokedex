@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
-    "pokemon": "^1.0.0"
+    "pokemon-models": "^1.0.0"
   },
   "devDependencies": {
     "@types/node": "^10.11.4"

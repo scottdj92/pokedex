@@ -3,7 +3,7 @@ import { render } from "react-dom";
 import { Grid, globalStyle, Typography, Row, Col } from "@smooth-ui/core-em";
 import { injectGlobal } from "react-emotion";
 import { ApolloProvider } from "react-apollo";
-import { PokemonDetail } from "./components";
+import { PokemonDetail, PokemonList } from "./components";
 import { ApolloClient } from "apollo-client";
 import { InMemoryCache } from "apollo-cache-inmemory";
 import { HttpLink } from "apollo-link-http";
@@ -21,6 +21,9 @@ const App: React.SFC = () => (
             {injectGlobal`${globalStyle}`}
             <Typography variant="display-4">Generation 1 Pokèdex</Typography>
             <Row>
+                <Col xs={3}>
+                    <PokemonList/>
+                </Col>
                 <Col>
                     <PokemonDetail/>
                 </Col>
