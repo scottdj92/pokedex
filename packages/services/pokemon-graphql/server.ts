@@ -1,6 +1,7 @@
 import { GraphQLServer } from "graphql-yoga";
 import signale from "signale";
 import { getPokemon } from "poke-api";
+import { Pokemon } from "pokemon-models";
 
 const typeDefs = `
     type Query {
@@ -11,10 +12,12 @@ const typeDefs = `
         id: Int
         name: String
         height: Int
+        weight: Int
         moves: [PokemonMove]
         sprites: PokemonSprites
         stats: [PokemonStat]
         types: [PokemonType]
+        abilities: [PokemonAbility]
     }
 
     type PokemonMove {
@@ -41,9 +44,18 @@ const typeDefs = `
         slot: Int
         type: PokemonDetailData
     }
+
+    type PokemonAbility {
+        ability: PokemonDetailData
+        is_hidden: Boolean
+        slot: Int
+    }
 `;
 
 const resolvers = {
+    Pokemon: {
+        abilities: (parent: Pokemon) => parent.abilities.sort((item) => item.slot),
+    },
     Query: {
         getPokemon: (_, { name }) => getPokemon(name).then((result) => result),
     },

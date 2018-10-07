@@ -2,6 +2,7 @@ import PokemonMove from "./PokemonMove";
 import PokemonSprites from "./PokemonSprites";
 import PokemonStats from "./PokemonStats";
 import PokemonType from "./PokemonType";
+import PokemonAbility from "./PokemonAbility";
 
 type Pokemon = {
     id: number;
@@ -12,6 +13,7 @@ type Pokemon = {
     sprites: PokemonSprites;
     stats: PokemonStats[];
     types: PokemonType[];
+    abilities: PokemonAbility[];
 };
 
 export default Pokemon;
