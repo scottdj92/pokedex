@@ -1,6 +1,6 @@
 import React from "react";
 import { render } from "react-dom";
-import { Grid, globalStyle, Typography, Row, Col } from "@smooth-ui/core-em";
+import { Grid, globalStyle, Typography, Row, Col, theme, ThemeProvider } from "@smooth-ui/core-em";
 import { injectGlobal } from "react-emotion";
 import { ApolloProvider } from "react-apollo";
 import { PokemonDetail, PokemonList } from "./components";
@@ -17,18 +17,20 @@ const client = new ApolloClient({
 
 const App: React.SFC = () => (
     <ApolloProvider client={client}>
-        <Grid>
-            {injectGlobal`${globalStyle}`}
-            <Typography variant="display-4">Generation 1 Pokèdex</Typography>
-            <Row>
-                <Col xs={3}>
-                    <PokemonList/>
-                </Col>
-                <Col>
-                    <PokemonDetail/>
-                </Col>
-            </Row>
-        </Grid>
+        <ThemeProvider theme={theme}>
+            <Grid fluid>
+                {injectGlobal`${globalStyle}`}
+                <Typography variant="display-4">Generation 1 Pokèdex</Typography>
+                <Row>
+                    <Col xs={3}>
+                        <PokemonList/>
+                    </Col>
+                    <Col>
+                        <PokemonDetail/>
+                    </Col>
+                </Row>
+            </Grid>
+        </ThemeProvider>
     </ApolloProvider>
 );
 

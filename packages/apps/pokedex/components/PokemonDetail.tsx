@@ -1,13 +1,13 @@
 import React from "react";
 import gql from "graphql-tag";
 import { ChildDataProps, graphql } from "react-apollo";
-import { Typography } from "@smooth-ui/core-em";
 import {
     PokemonDetailQueryVariables,
     PokemonDetailQuery,
 } from "models/schema/PokemonDetailQuery";
 import PokemonProfile from "./PokemonProfile";
 import PokemonAbilities from "./PokemonAbilities";
+import PokemonMoves from "./PokemonMoves";
 
 const PokemonDetailQuery = gql`
     query PokemonDetailQuery($name: String!) {
@@ -37,6 +37,11 @@ const PokemonDetailQuery = gql`
             sprites {
                 front_default
             }
+            moves {
+                move {
+                    name
+                }
+            }
         }
     }
 `;
@@ -57,6 +62,7 @@ const PokemonDetail: React.SFC<PokemonDetailType> = ({
         <>
             <PokemonProfile {...getPokemon}/>
             <PokemonAbilities abilities={getPokemon.abilities}/>
+            <PokemonMoves moves={getPokemon.moves}/>
         </>
     );
 };
