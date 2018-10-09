@@ -1,11 +1,27 @@
 import { GraphQLServer } from "graphql-yoga";
 import signale from "signale";
-import { getPokemon } from "poke-api";
-import { Pokemon } from "pokemon-models";
+import { getPokemon, getPokemonGeneration } from "poke-api";
+import { Pokemon, GameGeneration } from "pokemon-models";
 
 const typeDefs = `
     type Query {
         getPokemon(name: String!): Pokemon
+        getPokemonGeneration(name: String!): GameGeneration
+    }
+
+    type GameGeneration {
+        id: Int
+        main_region: GameGenerationRegion
+        name: String
+        pokemon_species: [GameGenerationPokemon]
+    }
+
+    type GameGenerationRegion {
+        name: String
+    }
+
+    type GameGenerationPokemon {
+        name: String
     }
 
     type Pokemon {
@@ -53,11 +69,15 @@ const typeDefs = `
 `;
 
 const resolvers = {
+    GameGeneration: {
+        pokemon_species: (parent: GameGeneration) => parent.pokemon_species.sort((a, b) => a.name < b.name ? -1 : 1),
+    },
     Pokemon: {
         abilities: (parent: Pokemon) => parent.abilities.sort((item) => item.slot),
     },
     Query: {
         getPokemon: (_, { name }) => getPokemon(name).then((result) => result),
+        getPokemonGeneration: (_, { name }) => getPokemonGeneration(name).then((result) => result),
     },
 };
 
