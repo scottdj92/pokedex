@@ -26,7 +26,7 @@ const PokemonMoves: React.SFC<Props> = ({ moves }) => (
         <Typography variant="h1">Moves</Typography>
         <MoveWrapper>
             {
-                moves.map((move) => <Move>{move.move.name}</Move>)
+                moves.map((move) => <Move key={move.move.name}>{move.move.name}</Move>)
             }
         </MoveWrapper>
     </section>

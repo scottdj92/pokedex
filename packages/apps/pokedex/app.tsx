@@ -7,6 +7,7 @@ import { PokemonDetail, PokemonList } from "./components";
 import { ApolloClient } from "apollo-client";
 import { InMemoryCache } from "apollo-cache-inmemory";
 import { HttpLink } from "apollo-link-http";
+import { Router } from "@reach/router";
 
 const client = new ApolloClient({
     cache: new InMemoryCache(),
@@ -26,7 +27,9 @@ const App: React.SFC = () => (
                         <PokemonList/>
                     </Col>
                     <Col>
-                        <PokemonDetail/>
+                        <Router>
+                            <PokemonDetail path="/:name"/>
+                        </Router>
                     </Col>
                 </Row>
             </Grid>
