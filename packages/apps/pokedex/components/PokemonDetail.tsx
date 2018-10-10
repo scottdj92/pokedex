@@ -8,6 +8,8 @@ import {
 import PokemonProfile from "./PokemonProfile";
 import PokemonAbilities from "./PokemonAbilities";
 import PokemonMoves from "./PokemonMoves";
+import { RouteComponentProps, Router } from "@reach/router";
+import RouterQuery from "models/RouterQuery";
 
 const PokemonDetailQuery = gql`
     query PokemonDetailQuery($name: String!) {
@@ -46,17 +48,19 @@ const PokemonDetailQuery = gql`
     }
 `;
 
-type PokemonDetailType = ChildDataProps<{}, PokemonDetailQuery, PokemonDetailQueryVariables>;
+// tslint:disable-next-line:max-line-length
+type PokemonDetailType = ChildDataProps<RouteComponentProps<RouterQuery>, PokemonDetailQuery, PokemonDetailQueryVariables>;
 const PokemonDetail: React.SFC<PokemonDetailType> = ({
     data: {
         loading,
         error,
         getPokemon,
-}}) => {
+    },
+    name,
+}) => {
     if (loading || error) {
         return null;
     }
-    console.log(getPokemon);
 
     return (
         <>
@@ -67,8 +71,9 @@ const PokemonDetail: React.SFC<PokemonDetailType> = ({
     );
 };
 
-const withPokemonDetail = graphql<{}, PokemonDetailQuery, PokemonDetailQueryVariables>(PokemonDetailQuery, {
-    options: ({}) => ({ variables: { name: "bulbasaur" }}),
+// tslint:disable-next-line:max-line-length
+const withPokemonDetail = graphql<RouteComponentProps<RouterQuery>, PokemonDetailQuery, PokemonDetailQueryVariables>(PokemonDetailQuery, {
+    options: ({ name }) => ({ variables: { name }}),
     props: ({ data }) => ({
         data,
     }),

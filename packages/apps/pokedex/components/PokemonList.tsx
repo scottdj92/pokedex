@@ -3,6 +3,7 @@ import { ChildDataProps, graphql } from "react-apollo";
 import gql from "graphql-tag";
 import { PokemonListQuery, PokemonListQueryVariables } from "models/schema/PokemonListQuery";
 import PokemonListItem from "./PokemonListItem";
+import styled from "react-emotion";
 
 const PokemonListQuery = gql`
     query PokemonListQuery($name: String!) {
@@ -13,6 +14,12 @@ const PokemonListQuery = gql`
             }
         }
     }
+`;
+
+const PokemonListWrapper = styled("ul")`
+    list-style: none;
+    height: 73vh;
+    overflow-y: scroll;
 `;
 
 type Props = ChildDataProps<{}, PokemonListQuery, PokemonListQueryVariables>;
@@ -27,16 +34,16 @@ const PokemonList: React.SFC<Props> = ({
         return null;
     }
 
-    console.log(getPokemonGeneration);
-
     return (
         <>
             <h1>Pokemon List</h1>
-            {
-                getPokemonGeneration.pokemon_species.map((pokemon) =>
-                    <PokemonListItem key={pokemon.name} name={pokemon.name}/>,
-                )
-            }
+            <PokemonListWrapper>
+                {
+                    getPokemonGeneration.pokemon_species.map((pokemon) =>
+                        <PokemonListItem key={pokemon.name} name={pokemon.name}/>,
+                    )
+                }
+            </PokemonListWrapper>
         </>
     );
 };
